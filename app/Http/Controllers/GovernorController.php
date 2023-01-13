@@ -55,6 +55,7 @@ class GovernorController extends Controller
             'phone' => 'required|numeric|digits_between:1,10',
             'password' => 'required|string|min:6|max:64',
             'manger_name' => 'required|string|max:50',
+            'gender' => 'required|in:ذكر,انثي',
         ]);
         $row = new Governor;
         $row->name = $request->name;
@@ -62,6 +63,7 @@ class GovernorController extends Controller
         $row->phone = $request->phone;
         $row->password = bcrypt($request->password);
         $row->manger_name = $request->manger_name;
+        $row->gender = $request->gender;
         $row->save();
         return redirect('/admin/governors')->with('success', 'تم اضافة البيانات بنجاح');
     }
@@ -108,6 +110,7 @@ class GovernorController extends Controller
             'username' => 'required|string|max:50|unique:governors,username,'.$request->id,
             'phone' => 'required|numeric|digits_between:1,10',
             'manger_name' => 'required|string|max:50',
+            'gender' => 'required|in:ذكر,انثي',
         ]);
         if( empty($request->password) ):
             $data = Governor::select('id','password')->where('id',$request->id)->first();
@@ -126,6 +129,7 @@ class GovernorController extends Controller
             'manger_name' => $request->manger_name,
             'phone' => $request->phone,
             'password' => $password,
+            'gender' => $request->gender,
         ]);
         return redirect('/admin/governors')->with('success', 'تم تحديث البيانات بنجاح');
     }

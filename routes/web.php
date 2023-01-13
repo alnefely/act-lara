@@ -166,3 +166,4 @@ Route::get('/admin/adding/documents', 'AddingDocumentsController@create');
 Route::post('/admin/adding/documents', 'AddingDocumentsController@store');
 Route::post('/admin/get/standards/ajax', 'AddingDocumentsController@ajax');
 Route::post('/admin/get/users/ajax', 'AddingDocumentsController@users');
+Route::post('/admin/get/governors/ajax', 'AddingDocumentsController@Governors');

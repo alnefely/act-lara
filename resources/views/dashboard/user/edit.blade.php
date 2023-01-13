@@ -57,7 +57,7 @@
 				<input type="number" class="form-control" required name="manger_phone" value="{{ $row->manger_phone }}" />
             </div>
 
-            <div class="col-md-3 mb-3">
+            {{-- <div class="col-md-3 mb-3">
 				<label>اسم رائد النشاط <span class="important">*</span></label>
 				<input type="text" class="form-control" required name="captin_name" value="{{ $row->captin_name }}" />
             </div>
@@ -65,7 +65,7 @@
             <div class="col-md-3 mb-3">
 				<label>جوال رائد النشاط <span class="important">*</span></label>
 				<input type="number" class="form-control" required name="captin_phone" value="{{ $row->captin_phone }}" />
-            </div>
+            </div> --}}
             
             <div class="col-md-3 mb-3">
                 <label>تعديل المشاركة <span class="important">*</span></label>

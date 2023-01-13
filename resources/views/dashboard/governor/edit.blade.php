@@ -31,6 +31,14 @@
 				<input type="text" class="form-control" required name="manger_name" value="{{ $row->manger_name }}" />
             </div>
 
+            <div class="col-md-3 mb-3">
+                <label>الجنس <span class="important">*</span></label>
+                <select name="gender" class="form-control" required>
+                    <option @if($row->gender=='ذكر') selected @endif value="ذكر">ذكر</option>
+                    <option @if($row->gender=='انثي') selected @endif value="انثي">انثي</option>
+                </select>
+            </div>
+
             <div class="col-md-4 mb-3">
                 <label>كلمة المرور <span class="important">*</span></label>
 				<div class="form-group pass_show"> 

@@ -26,15 +26,6 @@
     <form action="{{ url()->current() }}" method="post">@csrf
         <div class="row">
             <div class="col-md-4 mb-4">
-				<label>المحكم <span class="important">*</span></label>
-				<select name="governor_id[]" dir="rtl" class="form-control select2" multiple required>
-                    @foreach ($governors as $governor)
-                        <option value="{{ $governor->id }}">{{ $governor->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-            
-            <div class="col-md-4 mb-4">
 				<label>الفئات <span class="important">*</span></label>
 				<select class="form-control category_id">
                     @foreach ($categories as $category)
@@ -42,10 +33,14 @@
                     @endforeach
                 </select>
             </div>
-            
             <div class="col-md-4 mb-4">
 				<label>المشارك <span class="important">*</span></label>
 				<select class="form-control users" name="user_id" required></select>
+            </div>
+            <div class="col-md-4 mb-4">
+				<label>المحكم <span class="important">*</span></label>
+				<select name="governor_id[]" dir="rtl" class="form-control select2 governors" multiple required>
+                </select>
             </div>
         </div>
 
@@ -80,10 +75,9 @@
 <script src="/dashboard/plugins/select2/js/select2.min.js"></script>
 <script>
 
-$(document).ready(function() {
+    $(document).ready(function() {
 		$('.select2').select2({
 			placeholder: 'يجب اختيار 3 محكمين',
-			// searchInputPlaceholder: 'Search',
             maximumSelectionLength: 3,
             language: "ar"
 		});
@@ -120,6 +114,23 @@ $(document).ready(function() {
                 $('tbody').append(data);
             });
 
+                $.ajax({
+                    url: "{{ url('admin/get/governors/ajax') }}",
+                    type: "POST",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        user_id: user_id
+                    },
+                    beforeSend: function() {
+                        $('.governors').html('');
+                    },
+                }).done(function(res) {
+                    $.each(res.data, function(key, value) {
+                        $('.governors').append('<option value=' + value.id + '>' + value.name + '</option>')
+                    });
+                });
+            
+
             if( res.regs.length == 0) {
                 $('.loding').html('<div class="text-center">لا توجد اي بيانات</div>');
             }else {
@@ -130,7 +141,6 @@ $(document).ready(function() {
 
     $('.category_id').on('input', function() {
         var cat_id = $(this).val();
-
         $.ajax({
             url: "{{ url('admin/get/users/ajax') }}",
             type: "POST",
@@ -139,36 +149,14 @@ $(document).ready(function() {
                 cat_id: cat_id
             },
             beforeSend: function() {
-                // $('.loding').html('<div class="text-center"><i class="fas fa-spinner fa-3x fa-spin"></i></div>');
-                // $('tbody').html('');
                 $('.users').html('');
             },
         }).done(function(res) {
-        
             $.each(res.users, function(key, value) {
                 $('.users').append('<option value=' + value.id + '>' + value.name + '</option>')
             });
             $('.users').trigger('input');
-            // $.each(res.regs, function(name, val) {
-            //     var data = `
-            //         <tr>
-            //             <td style="font-size: 15px">
-            //                 <input type="checkbox" name="standard[]" value="`+val.id+`">
-            //             </td>
-            //             <td style="font-size: 15px">`+val.standard.name+`</td>
-            //             <td style="font-size: 15px"><a target="_blank" href="`+val.url+`">الرابط</a></td>
-            //         </tr>
-            //     `;
-            //     $('tbody').append(data);
-            // });
-
-            // if( res.regs.length == 0) {
-            //     $('.loding').html('<div class="text-center">لا توجد اي بيانات</div>');
-            // }else {
-            //     $('.loding').html('');
-            // }
         });
-
     });
 </script>
 @endsection

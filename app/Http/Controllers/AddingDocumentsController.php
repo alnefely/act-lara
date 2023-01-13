@@ -20,9 +20,9 @@ class AddingDocumentsController extends Controller
 
     public function create()
     {
-        $governors = Governor::select('id','name')->get();
+        // $governors = Governor::select('id','name')->get();
         $categories = Category::select('id','name')->get();
-        return view('dashboard.adding-documents.create', compact('governors','categories'));
+        return view('dashboard.adding-documents.create', compact('categories'));
     }
     
     public function store(Request $request)
@@ -32,7 +32,7 @@ class AddingDocumentsController extends Controller
             'governor_id.*' => 'exists:governors,id',
             'standard' => 'required|array',
             'standard.*' => 'exists:user_regs,id',
-        ]);
+        ]); 
         UserReg::whereIn('id',$request->standard)->update([
             'governor_id1' => $request->governor_id[0],
             'governor_id2' => $request->governor_id[1],
@@ -41,10 +41,22 @@ class AddingDocumentsController extends Controller
         return back()->with('success', 'تم اسناد المعايير بنجاح');
     }
     
+    public function Governors(Request $request)
+    {
+        if( $request->ajax() ):
+            $user = User::find($request->user_id);
+            $Governors = Governor::select('id','name','gender')->where('gender',$user->gender)->get();
+            return response()->json([
+                'data' => $Governors,
+            ]);
+        endif;
+    }
+
     public function users(Request $request)
     {
         if( $request->ajax() ):
-            $users = User::where('category_id', $request->cat_id)->select('id','name')->get();
+            $cat = Category::where('id', $request->cat_id)->first();
+            $users = User::where(['type'=>$cat->type,'category_id'=>$request->cat_id])->select('id','name')->get();
             return response()->json([
                 'users' => $users,
             ]);

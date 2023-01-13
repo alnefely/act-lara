@@ -102,6 +102,12 @@ class CreateInsertTable extends Migration
         DB::table('categories')->insert([
             [
                 'name' => 'فئة تجريبية',
+                'type' => 'كبار',
+                'created_at' => now(),
+            ],
+            [
+                'name' => 'فئة صغار',
+                'type' => 'صغار',
                 'created_at' => now(),
             ],
         ]);
@@ -161,16 +167,25 @@ class CreateInsertTable extends Migration
                 'created_at' => now(),
             ],
         ]);
+        DB::table('education')->insert([
+            [
+                'name' => 'الرياض',
+                'created_at' => now(),
+            ],
+            [
+                'name' => 'جدة',
+                'created_at' => now(),
+            ]
+        ]);
         DB::table('users')->insert([
             [
                 'name' => 'عبدالرحمن محمد',
                 'email' => 'u@u.com',
                 'school_name' => 'school name',
-                'manger_name' => 'اسم الادراة',
+                'manger_name' => 'اسم المدرب',
                 'manger_phone' => '1021464469',
                 'owner_phone' => '1021464469',
-                'captin_name' => 'اسم رائد النشاط',
-                'captin_phone' => '1021464469',
+                'education_id' => 1,
                 'status' => 1,
                 'category_id' => 1,
                 'password'=> Hash::make(123456),

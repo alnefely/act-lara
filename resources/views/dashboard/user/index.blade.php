@@ -22,7 +22,7 @@
                 <th>رقم الجوال</th>
                 <th>اسم المدرسة</th>
                 <th>فئة المشاركة</th>
-                <th>الدرجة</th>
+                <th>الجنس</th>
                 <th>تاريخ الإنشاء</th>
                 <th>التفاصيل</th>
             </tr>
@@ -70,7 +70,7 @@
                     {data: 'owner_phone', name: 'owner_phone'},
                     {data: 'school_name', name: 'school_name'},
                     {data: 'category.name', name: 'category.name'},
-                    {data: 'degree', name: 'degree'},
+                    {data: 'gender', name: 'gender'},
                     {data: 'created_at', name: 'created_at'},
                 ],
                 columnDefs: [

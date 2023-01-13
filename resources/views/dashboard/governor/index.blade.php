@@ -20,6 +20,7 @@
                 <th>اسم المستخدم</th>
                 <th>الجوال</th>
                 <th> الادارة</th>
+                <th>الجنس</th>
                 <th>تاريخ الإنشاء</th>
                 <th>خيارات</th>
             </tr>
@@ -53,17 +54,18 @@
                     {data: 'username', name: 'username'},
                     {data: 'phone', name: 'phone'},
                     {data: 'manger_name', name: 'manger_name'},
+                    {data: 'gender', name: 'gender'},
                     {data: 'created_at', name: 'created_at'},
                 ],
                 columnDefs: [
                     {
-                        targets: 5,
+                        targets: 6,
                         render: function (data, type, row, meta) {
                             return data.substr(0, 10);
                         }
                     },
                     {
-                        targets: 6,
+                        targets: 7,
                         render: function (data, type, row, meta) {
                             var edit = '<a href="{{ url('/admin/edit/governor') }}/'+row.id+'" class="btn btn-sm btn-success"><i class="far fa-fw fa-edit"></i></a>';
                             var del = '<form style="display:inline-block" action="{{url('/admin/destroy/governor')}}" method="post">@csrf<button onclick="if(confirm(`هل أنت متاكد من حذف البيانات؟`)){return true;}else{return false;}" class="btn btn-sm btn-danger"><i class="far fa-fw fa-trash-alt"></i></button><input type="hidden" name="id" value="'+row.id+'"></form>';

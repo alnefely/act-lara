@@ -35,9 +35,18 @@
 
             <div class="col-md-3 mb-3">
                 <label>الفئة <span class="important">*</span></label>
-                <select name="category_id" class="form-control" required>
+                <select name="category_id" class="form-control category" required>
                     @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        <option value="{{ $category->id }}" data-type="{{ $category->type }}">{{ $category->name }} | {{ $category->type }}</option>
+                    @endforeach
+                </select>
+            </div>
+            
+            <div class="col-md-3 mb-3">
+                <label>المنطقة التعليمية <span class="important">*</span></label>
+                <select name="education_id" class="form-control" required>
+                    @foreach ($educations as $ed)
+                        <option value="{{ $ed->id }}">{{ $ed->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -56,15 +65,12 @@
 				<label>جوال مدير المدرسة <span class="important">*</span></label>
 				<input type="number" class="form-control" required name="manger_phone" value="{{ old('manger_phone') }}" />
             </div>
-
             <div class="col-md-3 mb-3">
-				<label>اسم رائد النشاط <span class="important">*</span></label>
-				<input type="text" class="form-control" required name="captin_name" value="{{ old('captin_name') }}" />
-            </div>
-
-            <div class="col-md-3 mb-3">
-				<label>جوال رائد النشاط <span class="important">*</span></label>
-				<input type="number" class="form-control" required name="captin_phone" value="{{ old('captin_phone') }}" />
+                <label>الجنس <span class="important">*</span></label>
+                <select name="gender" class="form-control" required>
+                    <option value="ذكر">ذكر</option>
+                    <option value="انثي">انثي</option>
+                </select>
             </div>
             
             <div class="col-md-3 mb-3">
@@ -74,16 +80,91 @@
                     <option value="disable">لا</option>
                 </select>
             </div>
+        </div>
 
+        <h3 class="my-3">أسماء أعضاء الفريق</h3>
+
+        <div class="row">
+            <div class="col-md-4 mb-3">
+				<label>اسم العضو 1</label>
+				<input type="text" class="form-control" name="member1" value="{{ old('member1') }}" />
+            </div>
+            <div class="col-md-4 mb-3">
+				<label>تاريخ ميلاد العضو 1</label>
+				<input type="date" class="form-control" name="member1_date" value="{{ old('member1_date') }}" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 mb-3">
+				<label>اسم العضو 2</label>
+				<input type="text" class="form-control" name="member2" value="{{ old('member2') }}" />
+            </div>
+            <div class="col-md-4 mb-3">
+				<label>تاريخ ميلاد العضو 2</label>
+				<input type="date" class="form-control" name="member2_date" value="{{ old('member2_date') }}" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 mb-3">
+				<label>اسم العضو 3</label>
+				<input type="text" class="form-control" name="member3" value="{{ old('member3') }}" />
+            </div>
+            <div class="col-md-4 mb-3">
+				<label>تاريخ ميلاد العضو 3</label>
+				<input type="date" class="form-control" name="member3_date" value="{{ old('member3_date') }}" />
+            </div>
+        </div>
+
+        <div class="row big">
+            <div class="col-md-4 mb-3">
+				<label>اسم العضو 4</label>
+				<input type="text" class="form-control" name="member4" value="{{ old('member4') }}" />
+            </div>
+            <div class="col-md-4 mb-3">
+				<label>تاريخ ميلاد العضو 4</label>
+				<input type="date" class="form-control" name="member4_date" value="{{ old('member4_date') }}" />
+            </div>
+        </div>
+
+        <div class="row big">
+            <div class="col-md-4 mb-3">
+				<label>اسم العضو 5</label>
+				<input type="text" class="form-control" name="member5" value="{{ old('member5') }}" />
+            </div>
+            <div class="col-md-4 mb-3">
+				<label>تاريخ ميلاد العضو 5</label>
+				<input type="date" class="form-control" name="member5_date" value="{{ old('member5_date') }}" />
+            </div>
+        </div>
+
+        <div class="row">                
             <div class="col-12 mt-2">
                 <button class="btn btn-primary">انشاء البيانات</button>
             </div>
         </div>
+        
     </form>
 @endsection
 
 @section('script')
 	<script>
+
+        $('.category').on('input', function() {
+            var type = $(this).find(':selected').data('type');
+            if(type == 'صغار'){
+                $('.big').css('display','none');
+            }else {
+                $('.big').css('display','flex');
+            }
+        });
+
+        $(window).on('load', function() {
+            $('.category').trigger('input');
+        });
+
+
 		$(document).ready(function(){
 			$('.pass_show').append('<span class="ptxt">إظهار</span>');  
 		});

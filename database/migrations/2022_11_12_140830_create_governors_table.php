@@ -18,6 +18,7 @@ class CreateGovernorsTable extends Migration
 
             $table->string('name', 50); // اسم المحكم
             $table->string('username',30)->unique(); // 
+            $table->enum('gender', ['ذكر', 'انثي']);
             $table->string('phone', 11); //جوال المحكم
             $table->string('manger_name',50); // اسم الادراة
             $table->string('password',64); // 

@@ -8,6 +8,7 @@ use App\Models\UserReg;
 use App\Models\Evidence;
 use Illuminate\Http\Request;
 use App\Models\Degree;
+use App\Models\Education;
 
 class UserController extends Controller
 {
@@ -22,15 +23,10 @@ class UserController extends Controller
 
     public function json()
     {
-        $selected = ['id','name','school_name','owner_phone','category_id','status','created_at'];
+        $selected = ['id','name','school_name','owner_phone','category_id','status','gender','created_at'];
         $query = User::select($selected)->with('category:id,name')->get();
         // $query = User::select($selected)->with('category:id,name','posts:id,degree')->get();
-        return datatables($query)
-        ->addColumn('degree', function($row){
-            // return $row->posts()->sum('degree');
-            return 0;
-        })
-        ->toJson();
+        return datatables($query)->toJson();
     }
 
     /**
@@ -50,8 +46,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        $categories = Category::select('id','name')->get();
-        return view('dashboard.user.create', compact('categories')); 
+        $categories = Category::select('id','name','type')->get();
+        $educations = Education::select('id','name')->get();
+        return view('dashboard.user.create', compact('categories','educations')); 
     }
 
     /**
@@ -70,11 +67,24 @@ class UserController extends Controller
             'school_name' => 'required|string|max:50',
             'manger_name' => 'required|string|max:50',
             'manger_phone' => 'required|numeric|digits_between:1,10',
-            'captin_name' => 'required|string|max:50',
-            'captin_phone' => 'required|numeric|digits_between:1,10',
             'edit' => 'required|in:enable,disable',
             'category_id' => 'required|integer|exists:categories,id',
+            
+            'education_id' => 'required|integer|exists:education,id',
+            'gender' => 'required|in:ذكر,انثي',
+            'member1' => 'nullable|string|max:50',
+            'member1_date' => 'nullable|date',
+            'member2' => 'nullable|string|max:50',
+            'member2_date' => 'nullable|date',
+            'member3' => 'nullable|string|max:50',
+            'member3_date' => 'nullable|date',
+            'member4' => 'nullable|string|max:50',
+            'member4_date' => 'nullable|date',
+            'member5' => 'nullable|string|max:50',
+            'member5_date' => 'nullable|date',
         ]);
+        $cat = Category::find($request->education_id);
+
         $row = new User;
         $row->name = $request->name;
         $row->owner_phone = $request->owner_phone;
@@ -83,10 +93,21 @@ class UserController extends Controller
         $row->school_name = $request->school_name;
         $row->manger_name = $request->manger_name;
         $row->manger_phone = $request->manger_phone;
-        $row->captin_name = $request->captin_name;
-        $row->captin_phone = $request->captin_phone;
+        $row->type = $cat->type;
         $row->edit = $request->edit;
         $row->category_id = $request->category_id;
+        $row->education_id = $request->education_id;
+        $row->gender = $request->gender;
+        $row->member1 = $request->member1;
+        $row->member1_date = $request->member1_date;
+        $row->member2 = $request->member2;
+        $row->member2_date = $request->member2_date;
+        $row->member3 = $request->member3;
+        $row->member3_date = $request->member3_date;
+        $row->member4 = $request->member4;
+        $row->member4_date = $request->member4_date;
+        $row->member5 = $request->member5;
+        $row->member5_date = $request->member5_date;
         $row->save();
         return redirect('/admin/users')->with('success', 'تم اضافة المستخدم بنجاح');
     }
@@ -139,10 +160,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $row = User::where('id',$id);
+
+        return $row = User::where('id',$id);
         if( $row->count() > 0 ){
             $row = $row->first();
-            $categories = Category::select('id','name')->get();
+            $categories = Category::select('id','name','type')->get();
             return view('dashboard.user.edit',  compact('row','categories'));
         }
         abort(404);
@@ -165,6 +187,7 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
+        return $request->all();
         $validatedData = $request->validate([
             'id' => 'required|exists:users,id',
             'name' => 'required|string|max:50',
@@ -173,8 +196,8 @@ class UserController extends Controller
             'school_name' => 'required|string|max:50',
             'manger_name' => 'required|string|max:50',
             'manger_phone' => 'required|numeric|digits_between:1,10',
-            'captin_name' => 'required|string|max:50',
-            'captin_phone' => 'required|numeric|digits_between:1,10',
+            // 'captin_name' => 'required|string|max:50',
+            // 'captin_phone' => 'required|numeric|digits_between:1,10',
             'edit' => 'required|in:enable,disable',
             'category_id' => 'required|integer|exists:categories,id',
         ]);
@@ -196,8 +219,8 @@ class UserController extends Controller
             'school_name' => $request->school_name,
             'manger_name' => $request->manger_name,
             'manger_phone' => $request->manger_phone,
-            'captin_name' => $request->captin_name,
-            'captin_phone' => $request->captin_phone,
+            // 'captin_name' => $request->captin_name,
+            // 'captin_phone' => $request->captin_phone,
             'edit' => $request->edit,
             'password' => $password,
             'category_id' => $request->category_id,
