@@ -153,7 +153,7 @@
             },
         }).done(function(res) {
             $.each(res.users, function(key, value) {
-                $('.users').append('<option value=' + value.id + '>' + value.name + '</option>')
+                $('.users').append('<option value=' + value.id + '>' + value.name + ' - '+value.gender+'</option>')
             });
             $('.users').trigger('input');
         });
