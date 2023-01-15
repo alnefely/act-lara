@@ -23,8 +23,16 @@ class UserController extends Controller
 
     public function json()
     {
+        $userData = auth('AuthAdmin')->user();
         $selected = ['id','name','school_name','owner_phone','category_id','status','gender','created_at'];
-        $query = User::select($selected)->with('category:id,name')->get();
+        if( $userData->main == 'male' ):
+            $query = User::where('gender', 'ذكر')->select($selected)->with('category:id,name')->get();
+        elseif( $userData->main == 'female' ):
+            $query = User::where('gender', 'انثي')->select($selected)->with('category:id,name')->get();
+        else:
+            $query = User::select($selected)->with('category:id,name')->get();
+        endif;
+        
         // $query = User::select($selected)->with('category:id,name','posts:id,degree')->get();
         return datatables($query)->toJson();
     }

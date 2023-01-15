@@ -24,7 +24,7 @@ class CreateAdminsTable extends Migration
             $table->bigInteger('group_id')->unsigned();
             $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade')->onUpdate('cascade');
 
-            $table->enum('main', ['normal', 'main'])->default('normal');
+            $table->enum('main', ['normal', 'main', 'male', 'female'])->default('normal');
             $table->string('info', 255)->nullable();
             $table->string('img', 100)->nullable();
             $table->rememberToken();

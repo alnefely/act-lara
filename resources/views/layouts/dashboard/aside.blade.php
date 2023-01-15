@@ -81,7 +81,6 @@
                 </a>
             </li> --}}
 
-
             <li class="slide">
                 <a class="side-menu__item" href="{{ route('contact.index') }}">
                     <i class="fa fa-quote-right side-menu__icon"></i>
