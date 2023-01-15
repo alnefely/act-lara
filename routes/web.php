@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// Test Messgae
 Route::pattern('id', '[0-9]+');
 
 Route::get('/', function () {
