@@ -13,16 +13,12 @@
     <table class="table table-striped ">
         <thead class="thead-dark">
             <tr>
-                <td style="font-size: 13px;"><a style="background-color: rgb(241, 228, 243)" >فئة المشاركة </a> {{ $user->category->name }} </td>
-                <td style="font-size: 13px"><a style="background-color: rgb(241, 228, 243)"> اسم المشارك</a> {{$user->name}}  </td>
-                <td style="font-size: 13px"><a style="background-color: rgb(241, 228, 243)"> رقم جوال المشارك</a> {{ $user->owner_phone }}  </td>
-                <td style="font-size: 13px"><a style="background-color: rgb(241, 228, 243)"> اسم المدرسة</a> {{ $user->school_name }}</td>
+                <td style="font-size: 13px;"><a style="background-color: rgb(243, 238, 228)" >الفئة </a> {{ $user->category->name }} - @if ($user->gender == 'M')  بنين  @else بنات @endif </td>
+                <td style="font-size: 13px"><a style="background-color: rgb(243, 238, 228)"> اسم مدير الفريق</a> {{$user->name}}  </td>
+                <td style="font-size: 13px"><a style="background-color: rgb(243, 238, 228)"> رقم مدير الفريق</a> {{ $user->owner_phone }}  </td>
+                <td style="font-size: 13px"><a style="background-color: rgb(243, 238, 228)"> اسم الفريق</a> {{ $user->school_name }}</td>
             </tr>
-            <tr>
-                <td style="font-size: 13px"><a style="background-color: rgb(241, 228, 243)"> مدير المدرسة</a> {{$user->manger_name}}  </td>
-                <td style="font-size: 13px"><a style="background-color: rgb(241, 228, 243)"> رقم جوال المدير</a> {{ $user->manger_phone }} </td>
-                <td style="font-size: 13px"><a style="background-color: rgb(241, 228, 243)"> رائد النشاط</a> {{ $user->captin_name }}  </td>
-                <td style="font-size: 13px"><a style="background-color: rgb(241, 228, 243)"> رقم جوال رائد النشاط</a> {{ $user->captin_phone }}</td>
+                <td style="font-size: 13px"><a style="background-color: rgb(243, 238, 228)"> أعضاء الفريق</a> {{ $user->captin_name }}  </td>
             </tr>
         </thead>
     </table>

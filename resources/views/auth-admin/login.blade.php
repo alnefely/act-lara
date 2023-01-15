@@ -66,8 +66,8 @@
             </form>
             <br>
             
-            <a href="{{ url('/forget/password') }}">نسيت كلمة المرور؟</a>
-            || <a href="{{ url('/user/register') }}">مستخدم جديد؟</a>
+            <a class="text-dark" href="{{ url('/forget/password') }}">نسيت كلمة المرور؟</a>
+            || <a class="text-dark" href="{{ url('/user/register') }}">مستخدم جديد؟</a>
 
           </div>
         </div>

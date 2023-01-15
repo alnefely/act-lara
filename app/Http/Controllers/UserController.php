@@ -26,9 +26,9 @@ class UserController extends Controller
         $userData = auth('AuthAdmin')->user();
         $selected = ['id','name','school_name','owner_phone','category_id','status','gender','created_at'];
         if( $userData->main == 'male' ):
-            $query = User::where('gender', 'ذكر')->select($selected)->with('category:id,name')->get();
+            $query = User::where('gender', 'M')->select($selected)->with('category:id,name')->get();
         elseif( $userData->main == 'female' ):
-            $query = User::where('gender', 'انثي')->select($selected)->with('category:id,name')->get();
+            $query = User::where('gender', 'F')->select($selected)->with('category:id,name')->get();
         else:
             $query = User::select($selected)->with('category:id,name')->get();
         endif;

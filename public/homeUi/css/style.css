@@ -100,23 +100,23 @@ h6, .h6 {
 }
 
 .btn-primary {
-  background: #50437b;
+  background: #423c1a;
   color: #fff;
 }
 .btn-primary:active {
-  background: #9b52ab !important;
+  background: #423c1a !important;
 }
 .btn-primary:hover {
-  background: #9b52ab;
+  background: #6b6337;
 }
 .btn-primary.focus, .btn-primary.active {
-  background: #9b52ab !important;
+  background: #423c1a !important;
   box-shadow: none !important;
 }
 
 .btn-transparent {
   background: transparent;
-  color: #50437b;
+  color: #423c1a;
   font-weight: bold;
 }
 .btn-transparent:active, .btn-transparent:hover {
@@ -124,7 +124,7 @@ h6, .h6 {
 }
 
 body {
-  background-color: #fff;
+  background-color: #e9e9e9;
   overflow-x: hidden;
 }
 
@@ -184,11 +184,11 @@ select:focus {
 }
 
 a.text-dark:hover {
-  color: #41228e !important;
+  color: #8e6e22 !important;
 }
 
 a:hover {
-  color: #41228e;
+  color: #8e7522;
 }
 
 .slick-slide {
@@ -582,7 +582,7 @@ textarea.form-control {
   transition: 0.3s ease;
 }
 .hover-bg-primary:hover {
-  background: #50437b;
+  background: #7b7343;
 }
 .hover-bg-primary:hover * {
   color: #fff;

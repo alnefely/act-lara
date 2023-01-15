@@ -5,7 +5,7 @@
         
         <h5 class="desktop-logo logo-light active" style="font-family: 'Cairo';">
             {{-- <a href="{{ url('/') }}">{{ setting()->site_name }}</a> --}}
-            <a>جائزة إدارة النشاط الطلابي</a>
+            <a>أولمبياد اللغة الانجليزية</a>
         </h5>
 
         {{-- <a class="desktop-logo logo-dark active" href="#"><img src="/dashboard/img/logo.png" class="main-logo dark-theme" alt="logo"></a> --}}
@@ -29,11 +29,11 @@
             </div>
         </div>
 
-        <ul class="side-menu" style="font-family: 'Cairo'; ">
+        <ul class="side-menu " style="font-family: 'Cairo'; ">
             <li class="slide">
                 <a class="side-menu__item" href="{{ url('/admin/home') }}">
                     <i class="fas fa-home side-menu__icon"></i>
-                    <span class="side-menu__label">الرئيسية</span>
+                    <span class="side-menu__label ">الرئيسية</span>
                 </a>
             </li>
             <hr />
@@ -41,7 +41,7 @@
             <li class="slide">
                 <a class="side-menu__item" href="{{ url('/admin/users') }}">
                     <i class="fa fa-users side-menu__icon"></i>
-                    <span class="side-menu__label">المشاركات</span>
+                    <span class="side-menu">المشاركات</span>
                 </a>
             </li>
             <hr />
@@ -81,7 +81,7 @@
                 </a>
             </li> --}}
 
-            <li class="slide">
+            {{-- <li class="slide">
                 <a class="side-menu__item" href="{{ route('contact.index') }}">
                     <i class="fa fa-quote-right side-menu__icon"></i>
                     <span class="side-menu__label">الرسائل</span>
@@ -92,7 +92,7 @@
                     <i class="fa fa-user side-menu__icon"></i>
                     <span class="side-menu__label">الملف التعريفي</span>
                 </a>
-            </li>
+            </li> --}}
             {{-- <li class="slide">
                 <a class="side-menu__item" data-toggle="slide" href="#">
                     <i class="fas fa-users side-menu__icon"></i>

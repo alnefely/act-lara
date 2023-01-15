@@ -12,7 +12,7 @@
 	<div class="row">
 
 		<div class="col-lg-6 col-xl-3 col-md-6 col-12">
-			<div class="card bg-purple-gradient text-white ">
+			<div class="card bg-warning-gradient text-white ">
 				<a href="{{ url('admin/users') }}">
 					<div class="card-body">
 						<div class="row">
@@ -34,7 +34,7 @@
 		</div>
 
 		<div class="col-lg-6 col-xl-3 col-md-6 col-12">
-			<div class="card bg-info-gradient text-white ">
+			<div class="card bg-green-gradient text-white ">
 				<a href="{{ url('admin/governors') }}">
 					<div class="card-body">
 						<div class="row">
@@ -56,7 +56,7 @@
 		</div>
 
 		<div class="col-lg-6 col-xl-3 col-md-6 col-12">
-			<div class="card bg-secondary-gradient text-white ">
+			<div class="card bg-brown-gradient text-white ">
 				<a href="#">
 					<div class="card-body">
 						<div class="row">
@@ -77,7 +77,7 @@
 			</div>
 		</div>
 		<div class="col-lg-6 col-xl-3 col-md-6 col-12">
-			<div class="card bg-teal-gradient text-white ">
+			<div class="card bg-secondary-gradient text-white ">
 				<a href="{{ url('/dashboard/contact') }}">
 					<div class="card-body">
 						<div class="row">

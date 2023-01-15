@@ -1,8 +1,8 @@
 @extends('layouts.dashboard.app-admin')
-@section('title', 'المشاركين')
+@section('title', 'الفرق المشاركة')
 
 @section('breadcrumb')
-	<li class="breadcrumb-item"><a href="{{url('admin/create/user')}}">انشاء مشارك جديد</a></li>
+	{{-- <li class="breadcrumb-item"><a href="{{url('admin/create/user')}}">انشاء مشارك جديد</a></li> --}}
 	<li class="breadcrumb-item active">@yield('title')</li>
 @endsection
 
@@ -14,13 +14,13 @@
 
 
 @section('content')
-    <table class="table table-striped data-table text-md-nowrap" width="100%">
+    <table class="table table-warning data-table text-md-nowrap" width="100%">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>اسم المشارك</th>
+                <th>مدير الفريق</th>
                 <th>رقم الجوال</th>
-                <th>اسم المدرسة</th>
+                <th>اسم الفرق</th>
                 <th>فئة المشاركة</th>
                 <th>الجنس</th>
                 <th>تاريخ الإنشاء</th>
@@ -84,7 +84,7 @@
                         targets: 7,
                         render: function (data, type, row, meta) {
                             // var edit = '<a href="{{ url('/admin/edit/user') }}/'+row.id+'" class="btn btn-sm btn-success"><i class="far fa-fw fa-edit"></i></a>';
-                            var show = '<a title="التفاصيل" href="{{ url('/admin/show/user') }}/'+row.id+'" class="btn btn-sm btn-primary"><i class="far fa-fw fa-eye"></i></a>';
+                            var show = '<a title="التفاصيل" href="{{ url('/admin/show/user') }}/'+row.id+'" class="btn btn-sm btn-secondary"><i class="far fa-fw fa-eye"></i></a>';
                             var del = '<form style="display:inline-block" action="{{url('/admin/destroy/user')}}" method="post">@csrf<button onclick="if(confirm(`هل أنت متاكد من حذف البيانات؟`)){return true;}else{return false;}" class="btn btn-sm btn-danger"><i class="far fa-fw fa-trash-alt"></i></button><input type="hidden" name="id" value="'+row.id+'"></form>';    
                             if ( row.status == 0) {
                             var approve = '<a title="التفاصيل" href="{{ url('/admin/approve/user') }}/'+row.id+'" class="btn btn-sm btn-success"><i class="far fa-fw fa fa-check"></i></a>';

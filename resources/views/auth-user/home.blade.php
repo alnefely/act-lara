@@ -1,5 +1,5 @@
 @extends('auth-user.app')
-@section('title', 'لوحة المشارك')
+@section('title', 'لوحة الفريق المشارك')
 
 @section('style')
 
@@ -12,8 +12,8 @@
 @section('content')
     <br>
     
-    <h5 class="mb-4"> <i class="fas fa-calendar"></i> الرفع والتعديل متاح حتى تاريخ 10/02/2023 | الملفات يجب ان تكون بصيغة pdf وأن لاتتجاوز 1MB</h5>
-    <h4 class="mb-4"><i class="fas fa-star"></i> فئة الجائزة :  <a style="color: rebeccapurple">{{ $user->category->name }}</a></h4>
+    <h5 class="mb-4"> <i class="fas fa-calendar"></i>الرجاء وضع كل معيار في مجلد ورابط مختلف في google drive لتسهل عملية مراجعتها من المحكمين</h5>
+    <h4 class="mb-4"><i class="fas fa-star"></i> فئة الفريق المشارك :  <a style="color: rebeccapurple">{{ $user->category->name }}</a></h4>
 
     
     <div style="overflow: auto">
@@ -24,7 +24,7 @@
                 <tr>
                     <th style="font-size: 15px">#</th>
                     <th style="font-size: 15px">المعيار</th>
-                    <th style="font-size: 15px">رفع الملف</th>
+                    <th style="font-size: 15px">الرابط</th>
                 </tr>
             </thead>
 

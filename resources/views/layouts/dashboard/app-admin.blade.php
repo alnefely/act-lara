@@ -70,7 +70,7 @@
                                 @endif
                             </a>
                             <div class="dropdown-menu">
-                                <div class="main-header-profile bg-primary p-3">
+                                <div class="main-header-profile bg-warning p-3">
                                     <div class="d-flex wd-100p">
                                         <div class="main-img-user">
                                             @if( !empty(adminInfo('img')) )
@@ -84,7 +84,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a class="dropdown-item" href="{{ url('/admin/profile') }}"><i class="bx bx-user-circle"></i>الملف التعريفي</a>
+                                {{-- <a class="dropdown-item" href="{{ url('/admin/profile') }}"><i class="bx bx-user-circle"></i>الملف التعريفي</a> --}}
                                 {{-- <a class="dropdown-item" href="{{ url('/admin/settings') }}"><i class="bx bx-slider-alt"></i> إعدادت</a> --}}
                                 <a class="dropdown-item" href="{{ url('/admin/logout') }}"><i class="bx bx-log-out"></i> تسجيل خروج</a>
                             </div>
