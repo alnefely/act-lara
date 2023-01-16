@@ -46,7 +46,7 @@
 				<label>اسم المدرسة <span class="important">*</span></label>
 				<input type="text" class="form-control" required name="school_name" value="{{ $row->school_name }}" />
             </div>
-
+{{-- 
             <div class="col-md-3 mb-3">
 				<label>اسم مدير المدرسة <span class="important">*</span></label>
 				<input type="text" class="form-control" required name="manger_name" value="{{ $row->manger_name }}" />
@@ -55,7 +55,7 @@
             <div class="col-md-3 mb-3">
 				<label>جوال مدير المدرسة <span class="important">*</span></label>
 				<input type="number" class="form-control" required name="manger_phone" value="{{ $row->manger_phone }}" />
-            </div>
+            </div> --}}
 
             {{-- <div class="col-md-3 mb-3">
 				<label>اسم رائد النشاط <span class="important">*</span></label>

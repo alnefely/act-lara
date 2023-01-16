@@ -9,8 +9,8 @@
 <link rel="stylesheet" href="/dashboard/plugins/select2/css/select2.min.css" />
 <style>
     .select2-container--default .select2-selection--multiple .select2-selection__choice {
-        background-color: #00bcd4;
-        border: 1px solid #00bcd4;
+        background-color: #966702;
+        border: 1px solid #35a17a;
     }
     .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
         color: #f44336;

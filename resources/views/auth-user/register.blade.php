@@ -67,8 +67,8 @@
 
               <div class="col-md-12">
               <select  name="gender" class="form-control px-0 mb-4  text-right" required>
-                    <option value="M">بنين</option>
-                    <option value="F">بنات</option>
+                    <option value="بنين">بنين</option>
+                    <option value="بنات">بنات</option>
                 </select>
             </div>
   

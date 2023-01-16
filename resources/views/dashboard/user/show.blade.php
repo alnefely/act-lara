@@ -13,7 +13,7 @@
     <table class="table table-striped ">
         <thead class="thead-dark">
             <tr>
-                <td style="font-size: 13px;"><a style="background-color: rgb(243, 238, 228)" >الفئة </a> {{ $user->category->name }} - @if ($user->gender == 'M')  بنين  @else بنات @endif </td>
+                <td style="font-size: 13px;"><a style="background-color: rgb(243, 238, 228)" >الفئة </a> {{ $user->category->name }} - {{$user->gender}}  </td>
                 <td style="font-size: 13px"><a style="background-color: rgb(243, 238, 228)"> اسم مدير الفريق</a> {{$user->name}}  </td>
                 <td style="font-size: 13px"><a style="background-color: rgb(243, 238, 228)"> رقم مدير الفريق</a> {{ $user->owner_phone }}  </td>
                 <td style="font-size: 13px"><a style="background-color: rgb(243, 238, 228)"> اسم الفريق</a> {{ $user->school_name }}</td>

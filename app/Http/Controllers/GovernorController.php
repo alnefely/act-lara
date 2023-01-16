@@ -55,7 +55,7 @@ class GovernorController extends Controller
             'phone' => 'required|numeric|digits_between:1,10',
             'password' => 'required|string|min:6|max:64',
             'manger_name' => 'required|string|max:50',
-            'gender' => 'required|in:ذكر,انثي',
+            'gender' => 'required|in:بنين,بنات',
         ]);
         $row = new Governor;
         $row->name = $request->name;
@@ -110,7 +110,7 @@ class GovernorController extends Controller
             'username' => 'required|string|max:50|unique:governors,username,'.$request->id,
             'phone' => 'required|numeric|digits_between:1,10',
             'manger_name' => 'required|string|max:50',
-            'gender' => 'required|in:ذكر,انثي',
+            'gender' => 'required|in:بنين,بنات',
         ]);
         if( empty($request->password) ):
             $data = Governor::select('id','password')->where('id',$request->id)->first();

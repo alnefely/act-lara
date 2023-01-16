@@ -19,7 +19,7 @@
     <div style="overflow: auto">
         @php $user = App\Models\User::find(Auth::user()->id); @endphp
         @if ($user->status == 1)
-        <table class="table table-striped">
+        <table class="table table-warning">
             <thead class="thead-dark">
                 <tr>
                     <th style="font-size: 15px">#</th>

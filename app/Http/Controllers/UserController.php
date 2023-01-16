@@ -26,9 +26,9 @@ class UserController extends Controller
         $userData = auth('AuthAdmin')->user();
         $selected = ['id','name','school_name','owner_phone','category_id','status','gender','created_at'];
         if( $userData->main == 'male' ):
-            $query = User::where('gender', 'M')->select($selected)->with('category:id,name')->get();
+            $query = User::where('gender', 'بنين')->select($selected)->with('category:id,name')->get();
         elseif( $userData->main == 'female' ):
-            $query = User::where('gender', 'F')->select($selected)->with('category:id,name')->get();
+            $query = User::where('gender', 'بنات')->select($selected)->with('category:id,name')->get();
         else:
             $query = User::select($selected)->with('category:id,name')->get();
         endif;
@@ -79,7 +79,7 @@ class UserController extends Controller
             'category_id' => 'required|integer|exists:categories,id',
             
             'education_id' => 'required|integer|exists:education,id',
-            'gender' => 'required|in:ذكر,انثي',
+            'gender' => 'required|in:بنين,بنات',
             'member1' => 'nullable|string|max:50',
             'member1_date' => 'nullable|date',
             'member2' => 'nullable|string|max:50',
@@ -99,8 +99,6 @@ class UserController extends Controller
         $row->email = $request->email;
         $row->password = bcrypt($request->password);
         $row->school_name = $request->school_name;
-        $row->manger_name = $request->manger_name;
-        $row->manger_phone = $request->manger_phone;
         $row->type = $cat->type;
         $row->edit = $request->edit;
         $row->category_id = $request->category_id;

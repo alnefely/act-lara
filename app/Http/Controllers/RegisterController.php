@@ -97,7 +97,7 @@ class RegisterController extends Controller
             'school_name' => 'required|string|max:50',
             'category_id' => 'required|integer|exists:categories,id',            
             'education_id' => 'required|integer|exists:education,id',
-            'gender' => 'required|in:M,F',
+            'gender' => 'required|in:بنين,بنات',
             'member1' => 'nullable|string|max:50',
             'member1_date' => 'nullable|date',
             'member2' => 'nullable|string|max:50',
