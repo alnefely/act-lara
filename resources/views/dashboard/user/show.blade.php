@@ -44,6 +44,8 @@
             </thead>
 
             <tbody>
+
+                
                 @foreach ($evidences as $key => $item)
                     <tr>
                         <td>{{ $key+1 }}</td>
@@ -55,7 +57,11 @@
                         </td>
                         <td>
                             @php
-                                $deg1 = \App\Models\Degree::where(['governor_id'=>$item->governor1->id,'reg_id'=>$item->id])->sum('degree');
+                                if( isset($item->governor1->id) ):
+                                    $deg1 = \App\Models\Degree::where(['governor_id'=>$item->governor1->id,'reg_id'=>$item->id])->sum('degree');
+                                else:
+                                    $deg1 = 0;
+                                endif;
                             @endphp
                             {{ number_format($deg1) }}
                         </td>
@@ -66,7 +72,11 @@
                         </td>
                         <td>
                             @php
-                                $deg2 = \App\Models\Degree::where(['governor_id'=>$item->governor2->id,'reg_id'=>$item->id])->sum('degree');
+                                if( isset($item->governor2->id) ):
+                                    $deg2 = \App\Models\Degree::where(['governor_id'=>$item->governor2->id,'reg_id'=>$item->id])->sum('degree');
+                                else:
+                                    $deg2 = 0;
+                                endif;
                             @endphp
                             {{ number_format($deg2) }}
                         </td>
@@ -77,7 +87,12 @@
                         </td>
                         <td>
                             @php
-                                $deg3 = \App\Models\Degree::where(['governor_id'=>$item->governor3->id,'reg_id'=>$item->id])->sum('degree');
+                                if( isset($item->governor3->id) ):
+                                    $deg3 = \App\Models\Degree::where(['governor_id'=>$item->governor3->id,'reg_id'=>$item->id])->sum('degree');
+                                else:
+                                    $deg3 = 0;
+                                endif;
+                                
                             @endphp
                             {{ number_format($deg3) }}
                         </td>
