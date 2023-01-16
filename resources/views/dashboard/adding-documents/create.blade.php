@@ -34,7 +34,7 @@
                 </select>
             </div>
             <div class="col-md-4 mb-4">
-				<label>المشارك <span class="important">*</span></label>
+				<label>الفريق المشارك <span class="important">*</span></label>
 				<select class="form-control users" name="user_id" required></select>
             </div>
             <div class="col-md-4 mb-4">
@@ -47,7 +47,7 @@
         <div class="row">
             <div class="col-md-8 mb-4">
                 <div class="data" style="overflow: auto">
-                    <table class="table table-striped">
+                    <table class="table table-warning">
                         <thead class="thead-dark">
                             <tr>
                                 <th style="font-size: 15px">#</th>
@@ -64,7 +64,7 @@
 
         <div class="row">
             <div class="col-12 mt-2">
-                <button class="btn btn-primary">انشاء البيانات</button>
+                <button class="btn btn-success">انشاء البيانات</button>
             </div>
         </div>
     </form>
@@ -153,7 +153,7 @@
             },
         }).done(function(res) {
             $.each(res.users, function(key, value) {
-                $('.users').append('<option value=' + value.id + '>' + value.name + ' - '+value.gender+'</option>')
+                $('.users').append('<option value=' + value.id + '>' + value.school_name + ' - '+value.gender+'</option>')
             });
             $('.users').trigger('input');
         });

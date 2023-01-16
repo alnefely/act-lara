@@ -12,7 +12,7 @@
 
 
 @section('content')
-    <table class="table table-striped data-table text-md-nowrap" width="100%">
+    <table class="table table-warning data-table text-md-nowrap" width="100%">
         <thead>
             <tr>
                 <th>ID</th>

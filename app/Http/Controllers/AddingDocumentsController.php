@@ -56,7 +56,7 @@ class AddingDocumentsController extends Controller
     {
         if( $request->ajax() ):
             $cat = Category::where('id', $request->cat_id)->first();
-            $users = User::where(['type'=>$cat->type,'category_id'=>$request->cat_id])->select('id','name','gender')->get();
+            $users = User::where(['type'=>$cat->type,'category_id'=>$request->cat_id])->select('id','school_name','gender')->get();
             return response()->json([
                 'users' => $users,
             ]);

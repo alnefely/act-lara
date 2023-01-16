@@ -34,8 +34,8 @@
             <div class="col-md-3 mb-3">
                 <label>الجنس <span class="important">*</span></label>
                 <select name="gender" class="form-control" required>
-                    <option value="ذكر">ذكر</option>
-                    <option value="انثي">انثي</option>
+                    <option value="بنين">بنين</option>
+                    <option value="بنات">بنات</option>
                 </select>
             </div>
 
