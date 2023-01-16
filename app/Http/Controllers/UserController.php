@@ -91,7 +91,7 @@ class UserController extends Controller
             'member5' => 'nullable|string|max:50',
             'member5_date' => 'nullable|date',
         ]);
-        $cat = Category::find($request->education_id);
+        $cat = Category::find($request->category_id);
 
         $row = new User;
         $row->name = $request->name;
