@@ -12,7 +12,7 @@
 <div style="overflow: auto">
     
     <div style="overflow: auto">
-        <table class="table table-striped">
+        <table class="table table-warning">
             <thead class="thead-dark">
                 <tr>
                     <th style="font-size: 15px">#</th>
@@ -37,7 +37,12 @@
         </table>
     </div>
 
-    <li class="list-group-item text-center" style="font-size: 15px; background-color:rgb(36, 43, 68); color:white">مجموع الدرجات: <strong>{{ number_format($degrees->sum('degree')) }}</strong></li>
+    <li class="list-group-item text-center" style="font-size: 15px; background-color:rgb(60, 60, 29); color:white">
+        مجموع الدرجات: <strong>{{ number_format($degrees->sum('degree')) }}</strong>
+        <br>
+        المتوسط
+        {{ ceil($degrees->sum('degree')) / 3 }}
+    </li>
 
 
 @endsection

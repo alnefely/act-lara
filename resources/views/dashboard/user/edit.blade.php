@@ -11,7 +11,7 @@
 @section('content')
     <form action="{{ url()->current() }}" method="post">@csrf
         <div class="row">
-            <div class="col-md-3 mb-3">
+            {{-- <div class="col-md-3 mb-3">
 				<label>اسم المشارك <span class="important">*</span></label>
 				<input type="text" class="form-control" required name="name" value="{{ $row->name }}" />
             </div>
@@ -40,36 +40,16 @@
                         <option @if($row->category_id==$category->id) selected @endif value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
                 </select>
-            </div>
+            </div> --}}
 
             <div class="col-md-3 mb-3">
-				<label>اسم المدرسة <span class="important">*</span></label>
-				<input type="text" class="form-control" required name="school_name" value="{{ $row->school_name }}" />
-            </div>
-{{-- 
-            <div class="col-md-3 mb-3">
-				<label>اسم مدير المدرسة <span class="important">*</span></label>
-				<input type="text" class="form-control" required name="manger_name" value="{{ $row->manger_name }}" />
+				<label>اسم الفريق <span class="important">*</span></label>
+				<input type="text" class="form-control"  name="school_name" value="{{ $row->school_name }}" disabled/>
             </div>
             
             <div class="col-md-3 mb-3">
-				<label>جوال مدير المدرسة <span class="important">*</span></label>
-				<input type="number" class="form-control" required name="manger_phone" value="{{ $row->manger_phone }}" />
-            </div> --}}
-
-            {{-- <div class="col-md-3 mb-3">
-				<label>اسم رائد النشاط <span class="important">*</span></label>
-				<input type="text" class="form-control" required name="captin_name" value="{{ $row->captin_name }}" />
-            </div>
-
-            <div class="col-md-3 mb-3">
-				<label>جوال رائد النشاط <span class="important">*</span></label>
-				<input type="number" class="form-control" required name="captin_phone" value="{{ $row->captin_phone }}" />
-            </div> --}}
-            
-            <div class="col-md-3 mb-3">
-                <label>تعديل المشاركة <span class="important">*</span></label>
-                <select name="edit" class="form-control" required>
+                <label>امكانية رفع الروابط <span class="important">*</span></label>
+                <select name="edit" class="form-control" >
                     <option @if($row->edit=='enable') selected @endif value="enable">نعم</option>
                     <option @if($row->edit=='disable') selected @endif value="disable">لا</option>
                 </select>
@@ -77,7 +57,7 @@
 
             <div class="col-12 mt-2">
                 <input type="hidden" name="id" value="{{ $row->id }}" />
-                <button class="btn btn-primary">تحديث البيانات</button>
+                <button class="btn btn-primary">تحديث</button>
             </div>
         </div>
     </form>

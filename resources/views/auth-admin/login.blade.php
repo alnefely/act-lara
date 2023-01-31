@@ -17,7 +17,7 @@
     <meta name="author" content="Themefisher">
     <meta name="generator" content="Themefisher Kross Template v1.0">
       <!-- Favicon -->
-      <link rel="shortcut icon" type="image/x-icon" href="{{asset('homeUi/images/favicon.png')}}" />
+      {{-- <link rel="shortcut icon" type="image/x-icon" href="{{asset('homeUi/images/favicon.png')}}" /> --}}
       
       <!-- ** Plugins Needed for the Project ** -->
       <!-- Bootstrap -->
@@ -52,13 +52,13 @@
           <div class="bg-white rounded text-center p-5 shadow-down">
             <h4 class="mb-80">تسجيل الدخول</h4>
             <form class="row"  action="{{ url()->current() }}" method="post">@csrf
-              <div class="col-md-6">
-                <input type="password" id="password" name="password" placeholder="كلمة المرور" class="form-control px-0 mb-4  " required>
+
+              <div class="col-md-12">
+                <input type="text" id="email" name="email" placeholder="اسم المستخدم" class="form-control px-0 mb-4  text-center" required>
               </div>
-              <div class="col-md-6">
-                <input type="text" id="email" name="email" placeholder="اسم المستخدم" class="form-control px-0 mb-4  " required>
+              <div class="col-md-12">
+                <input type="password" id="password" name="password" placeholder="كلمة المرور" class="form-control px-0 mb-4  text-center" required>
               </div>
-  
   
               <div class="col-lg-6 col-10 mx-auto">
                 <button class="btn btn-primary w-100">دخول</button>

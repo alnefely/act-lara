@@ -16,8 +16,7 @@ class AdminController extends Controller
     public function __construct()
     {
         $this->middleware('authadmin:home')->only('home');
-        $this->middleware('authadmin:profile_edit')->only('profile', 'update_profile');
-        
+        $this->middleware('authadmin:profile_edit')->only('profile', 'update_profile');        
         $this->middleware('authadmin:admin_show')->only('json','index');
         $this->middleware('authadmin:admin_create')->only('create','store');
         $this->middleware('authadmin:admin_edit')->only('edit', 'update');

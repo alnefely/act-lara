@@ -42,5 +42,8 @@ class UserReg extends Model
     {
         return $this->hasOne('App\Models\Governor', 'id', 'governor_id3');
     }
-
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }

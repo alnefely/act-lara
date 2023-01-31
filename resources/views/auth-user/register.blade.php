@@ -16,7 +16,7 @@
   <meta name="author" content="Themefisher">
   <meta name="generator" content="Themefisher Kross Template v1.0">
       <!-- Favicon -->
-      <link rel="shortcut icon" type="image/x-icon" href="{{asset('homeUi/images/favicon.png')}}" />
+      {{-- <link rel="shortcut icon" type="image/x-icon" href="{{asset('homeUi/images/favicon.png')}}" /> --}}
       
       <!-- ** Plugins Needed for the Project ** -->
       <!-- Bootstrap -->
@@ -51,14 +51,17 @@
       </div>
       <div class="col-lg-8 mx-auto">
         <div class="bg-white rounded text-center p-5 shadow-down">
-          <h4 class="mb-40" style="background-color:#423c1a; color:#fff;">تسجيل فريق جديد</h4>
+          <h4 class="mb-40" style="background-color:#423c1a; color:#fff;">تسجيل فريق جديد
+          <br> <p style="font-size: 14px; color:#fff">اذا واجهتك أي مشكلة بالتسجيل عبر الجوال يٌفضل استخدام جهاز كمبيوتر أو لاب توب
+          </p></h4>
+          
 
           <form action="{{route('register.store')}}" method="POST">
             {{ csrf_field() }}
 
             <div class="col-md-12">    
               <select  name="category_id" class="form-control category px-0 mb-4 text-right" required>
-                <option readonly>اختر فئة الجائزة</option>
+                <option readonly>اختر الفئة</option>
                 @foreach ($categories as $category)
                 <option value="{{ $category->id }}" data-type="{{ $category->type }}">{{ $category->name }} | {{ $category->type }}</option>
                 @endforeach
@@ -85,10 +88,13 @@
               <input type="text"  name="school_name" placeholder="اسم الفريق" class="form-control px-0 mb-4  text-right" required>
             </div>
             <div class="col-md-12">
-              <input type="text" name="name" placeholder=" اسم مدير الفريق الثلاثي" class="form-control px-0 mb-4  text-right" required>
+              <input type="text"  name="school_real" placeholder="اسم المدرسة" class="form-control px-0 mb-4  text-right" required>
             </div>
             <div class="col-md-12">
-              <input type="number"  name="owner_phone" placeholder="رقم جوال مدير الفريق" class="form-control px-0 mb-4  text-right" required>
+              <input type="text" name="name" placeholder=" اسم مدرب الفريق الثلاثي" class="form-control px-0 mb-4  text-right" required>
+            </div>
+            <div class="col-md-12">
+              <input type="number"  name="owner_phone" placeholder="رقم جوال مدرب الفريق" class="form-control px-0 mb-4  text-right" required>
             </div>
 
 
@@ -96,10 +102,10 @@
 
             <div class="row">
               <div class="col-md-6">
-                <input type="date" class="form-control px-0 mb-4  text-right" name="member1_date" value="{{ old('member1_date') }}" />
+                <input type="date" class="form-control px-0 mb-4  text-right" name="member1_date" value="{{ old('member1_date') }}"  />
                     </div>
                 <div class="col-md-6">
-            <input type="text" placeholder="اسم العضو الاول" class="form-control px-0 mb-4  text-right" name="member1" value="{{ old('member1') }}" />
+            <input type="text" placeholder="اسم العضو الاول" class="form-control px-0 mb-4  text-right" name="member1" value="{{ old('member1') }}" required />
                 </div>
 
             </div>
@@ -109,7 +115,7 @@
                   <input type="date" class="form-control px-0 mb-4  text-right" name="member2_date" value="{{ old('member2_date') }}" />
                 </div>
             <div class="col-md-6">
-            <input type="text" placeholder="اسم العضو الثاني" class="form-control px-0 mb-4  text-right" name="member2" value="{{ old('member2') }}" />
+            <input type="text" placeholder="اسم العضو الثاني" class="form-control px-0 mb-4  text-right" name="member2" value="{{ old('member2') }}" required/>
                 </div>
             </div>
     
@@ -118,7 +124,7 @@
                 <input type="date" class="form-control px-0 mb-4  text-right" name="member3_date" value="{{ old('member3_date') }}" />
               </div>
           <div class="col-md-6">
-          <input type="text" placeholder="اسم العضو الثالث" class="form-control px-0 mb-4  text-right" name="member3" value="{{ old('member3') }}" />
+          <input type="text" placeholder="اسم العضو الثالث" class="form-control px-0 mb-4  text-right" name="member3" value="{{ old('member3') }}" required/>
               </div>
             </div>
     

@@ -35,7 +35,8 @@
 
 		<div class="col-lg-6 col-xl-3 col-md-6 col-12">
 			<div class="card bg-green-gradient text-white ">
-				<a href="{{ url('admin/governors') }}">
+				{{-- {{ url('admin/governors') }} --}}
+				<a href="">
 					<div class="card-body">
 						<div class="row">
 							<div class="col-6">
@@ -78,7 +79,7 @@
 		</div>
 		<div class="col-lg-6 col-xl-3 col-md-6 col-12">
 			<div class="card bg-secondary-gradient text-white ">
-				<a href="{{ url('/dashboard/contact') }}">
+				<a href="">
 					<div class="card-body">
 						<div class="row">
 							<div class="col-6">

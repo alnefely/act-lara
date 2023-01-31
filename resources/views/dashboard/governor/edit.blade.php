@@ -34,8 +34,8 @@
             <div class="col-md-3 mb-3">
                 <label>الجنس <span class="important">*</span></label>
                 <select name="gender" class="form-control" required>
-                    <option @if($row->gender=='ذكر') selected @endif value="ذكر">ذكر</option>
-                    <option @if($row->gender=='انثي') selected @endif value="انثي">انثي</option>
+                    <option @if($row->gender=='بنين') selected @endif value="بنين">بنين</option>
+                    <option @if($row->gender=='بنات') selected @endif value="بنات">بنات</option>
                 </select>
             </div>
 

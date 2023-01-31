@@ -11,9 +11,10 @@
 
 @section('content')
     <br>
-    
-    <h5 class="mb-4"> <i class="fas fa-calendar"></i>الرجاء وضع كل معيار في مجلد ورابط مختلف في google drive لتسهل عملية مراجعتها من المحكمين</h5>
-    <h4 class="mb-4"><i class="fas fa-star"></i> فئة الفريق المشارك :  <a style="color: rebeccapurple">{{ $user->category->name }}</a></h4>
+    @if ($user->u_link !== null)
+    <h5 class="mb-4"> <i class="fas fa-comments"></i> <a href="{{$user->u_link}}" target="_blank" style="color: rgb(0, 74, 177)"> الدخول على رابط اجتماع الزوم </a></h5>
+    @endif
+    <h5 class="mb-4"><i class="fas fa-star"></i> فئة الفريق المشارك :  <a style="color: rgb(100, 73, 10)">{{ $user->category->name }}</a></h5>
 
     
     <div style="overflow: auto">

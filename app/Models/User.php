@@ -50,4 +50,12 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\UserReg', 'user_id', 'id');
     }
+
+    public function education()
+    {
+        return $this->hasOne('App\Models\Education', 'id', 'education_id');
+    }
+
+
 }
+

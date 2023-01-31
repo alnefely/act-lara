@@ -95,6 +95,7 @@ class RegisterController extends Controller
             'email' => 'required|email|unique:users|max:50',
             'password' => 'required|string|min:6|max:64',
             'school_name' => 'required|string|max:50',
+            'school_real' => 'required|string|max:50',
             'category_id' => 'required|integer|exists:categories,id',            
             'education_id' => 'required|integer|exists:education,id',
             'gender' => 'required|in:بنين,بنات',
@@ -109,7 +110,7 @@ class RegisterController extends Controller
             'member5' => 'nullable|string|max:50',
             'member5_date' => 'nullable|date',
         ]);
-        $cat = Category::find($request->education_id);
+        $cat = Category::find($request->category_id);
 
         $row = new User;
         $row->name = $request->name;
@@ -117,6 +118,7 @@ class RegisterController extends Controller
         $row->email = $request->email;
         $row->password = bcrypt($request->password);
         $row->school_name = $request->school_name;
+        $row->school_real = $request->school_real;
         $row->type = $cat->type;
         $row->category_id = $request->category_id;
         $row->education_id = $request->education_id;
@@ -133,7 +135,7 @@ class RegisterController extends Controller
         $row->member5_date = $request->member5_date;
         $row->save();
 
-        Session::flash('success' , 'تم التسجيل بنجاح وسيتم تفعيل الحساب خلال 24 ساعة');
+        Session::flash('success' , 'تم التسجيل بنجاح وسيتم تفعيل الحساب بعد مراجعة البيانات في أقرب وقت');
         return redirect('/auth');
     }
 }

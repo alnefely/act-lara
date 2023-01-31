@@ -9,6 +9,8 @@ use App\Models\Evidence;
 use Illuminate\Http\Request;
 use App\Models\Degree;
 use App\Models\Education;
+use PDF;
+
 
 class UserController extends Controller
 {
@@ -24,17 +26,28 @@ class UserController extends Controller
     public function json()
     {
         $userData = auth('AuthAdmin')->user();
-        $selected = ['id','name','school_name','owner_phone','category_id','status','gender','created_at'];
+        $selected = ['id','name','school_name','owner_phone','category_id','education_id','status','gender','created_at'
+                    ,'member1','member2','member3','member4','member5','member1_date','member2_date',
+                    'member3_date','member4_date','member5_date'];
         if( $userData->main == 'male' ):
-            $query = User::where('gender', 'بنين')->select($selected)->with('category:id,name')->get();
+            $query = User::where('gender', 'بنين')->select($selected)->with('category:id,name', 'education:id,name')->get();
         elseif( $userData->main == 'female' ):
-            $query = User::where('gender', 'بنات')->select($selected)->with('category:id,name')->get();
+            $query = User::where('gender', 'بنات')->select($selected)->with('category:id,name', 'education:id,name')->get();
         else:
-            $query = User::select($selected)->with('category:id,name')->get();
+            $query = User::select($selected)->with('category:id,name', 'education:id,name')->get();
         endif;
-        
-        // $query = User::select($selected)->with('category:id,name','posts:id,degree')->get();
-        return datatables($query)->toJson();
+
+      
+        return datatables($query)
+        ->addColumn('degree', function($row){
+            $all = UserReg::where('user_id',$row->id)->select('id','user_id')->get();
+            $ids = [];
+            foreach( $all as $d ){
+                $ids[] = $d->id;
+            }
+            $de = Degree::whereIn('reg_id', $ids)->sum('degree');
+            return ceil($de/3);
+        })->toJson();
     }
 
     /**
@@ -152,10 +165,23 @@ class UserController extends Controller
         if( $row->count() > 0 ) :
             $user = $row->first();
             $evidences = UserReg::with('standard:id,name','governor1:id,name','governor2:id,name','governor3:id,name')->where('user_id', $user->id)->get();
-            // $TotalScores = UserReg::where('user_id', $user->id)->sum('degree');
-            return view('dashboard.user.show', compact('user','evidences'));
+            $userData = auth('AuthAdmin')->user();
+            return view('dashboard.user.show', compact('user','evidences'));         
         endif;
         abort(404);
+    }
+
+    public function prindpdf($id)
+    {
+        $row = User::where('id',$id);
+        if( $row->count() > 0 ) :
+            $user = $row->first();
+            $evidences = UserReg::with('standard:id,name','governor1:id,name','governor2:id,name','governor3:id,name')->where('user_id', $user->id)->get();
+            $userData = auth('AuthAdmin')->user();            
+
+        $pdf = PDF::loadView('dashboard.user.prindpdf',compact('user','evidences'));
+        return $pdf->stream('team.pdf');
+        endif;
     }
 
     /**
@@ -167,21 +193,33 @@ class UserController extends Controller
     public function edit($id)
     {
 
-        return $row = User::where('id',$id);
+         $row = User::where('id',$id);
+         $userData = auth('AuthAdmin')->user();
         if( $row->count() > 0 ){
+            if ($userData->main == 'main'){
             $row = $row->first();
             $categories = Category::select('id','name','type')->get();
             return view('dashboard.user.edit',  compact('row','categories'));
+        }else{
+            return redirect()->back()->with('error', 'غير مصرح لك بالتعديل');
         }
-        abort(404);
+    }
     }
 
     public function approve($id)
     {
-        $data = User::find($id);
-        $data->status = 1;
-        $data->save();
-        return redirect()->back()->with('success', 'تم قبول المستخدم بنجاح');
+        {
+            $data = User::find($id);
+            $userData = auth('AuthAdmin')->user();
+            if ($userData->main == 'main'){
+                $data->status = 1;
+                $data->save();
+            return redirect()->back()->with('success', 'تم قبول المستخدم بنجاح');
+            }else
+            return redirect()->back()->with('error', 'غير مصرح لك بالموافقة');
+     
+        }
+
     }
 
     /**
@@ -193,45 +231,44 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        return $request->all();
+        // return $request->all();
         $validatedData = $request->validate([
-            'id' => 'required|exists:users,id',
-            'name' => 'required|string|max:50',
-            'owner_phone' => 'required|numeric|digits_between:1,10',
-            'email' => 'required|email|max:50|unique:users,email,'.$request->id,
-            'school_name' => 'required|string|max:50',
-            'manger_name' => 'required|string|max:50',
-            'manger_phone' => 'required|numeric|digits_between:1,10',
-            // 'captin_name' => 'required|string|max:50',
-            // 'captin_phone' => 'required|numeric|digits_between:1,10',
+            // 'id' => 'required|exists:users,id',
+            // 'name' => 'required|string|max:50',
+            // 'owner_phone' => 'required|numeric|digits_between:1,10',
+            // 'email' => 'required|email|max:50|unique:users,email,'.$request->id,
+            // 'school_name' => 'required|string|max:50',
+            // 'manger_name' => 'required|string|max:50',
+            // 'manger_phone' => 'required|numeric|digits_between:1,10',
             'edit' => 'required|in:enable,disable',
-            'category_id' => 'required|integer|exists:categories,id',
+            // 'category_id' => 'required|integer|exists:categories,id',
         ]);
 
-        if( empty($request->password) ):
-            $user = User::select('id','password')->where('id',$request->id)->first();
-            $password = $user->password;
-        else:
-            $validatedData = $request->validate([
-                'password' => 'required|string|min:6|max:64',
-            ]);
-            $password = bcrypt($request->password);
-        endif;
+        // if( empty($request->password) ):
+        //     $user = User::select('id','password')->where('id',$request->id)->first();
+        //     $password = $user->password;
+        // else:
+        //     $validatedData = $request->validate([
+        //         'password' => 'required|string|min:6|max:64',
+        //     ]);
+        //     $password = bcrypt($request->password);
+        // endif;
         User::where('id', $request->id)
         ->update([
-            'name' => $request->name,
-            'owner_phone' => $request->owner_phone,
-            'email' => $request->email,
-            'school_name' => $request->school_name,
-            'manger_name' => $request->manger_name,
-            'manger_phone' => $request->manger_phone,
-            // 'captin_name' => $request->captin_name,
-            // 'captin_phone' => $request->captin_phone,
             'edit' => $request->edit,
-            'password' => $password,
-            'category_id' => $request->category_id,
-        ]);
+                 ]);
         return redirect('/admin/users')->with('success', 'تم تحديث البيانات بنجاح');
+        //     'name' => $request->name,
+        //     'owner_phone' => $request->owner_phone,
+        //     'email' => $request->email,
+        //     'school_name' => $request->school_name,
+        //     'manger_name' => $request->manger_name,
+        //     'manger_phone' => $request->manger_phone,
+
+
+            // 'password' => $password,
+            // 'category_id' => $request->category_id,
+
     }
 
     /**
@@ -242,11 +279,16 @@ class UserController extends Controller
      */
     public function destroy(Request $request)
     {
+        $userData = auth('AuthAdmin')->user();
+        if ($userData->main == 'main'){
         $validatedData = $request->validate([
             'id' => 'required|exists:users,id',
         ]);
         User::where('id', $request->id)->delete();
         return redirect('/admin/users')->with('success', 'تم حذف البيانات بنجاح');
+    }else
+         return redirect('/admin/users')->with('error', 'غير مصرح لك بالحذف');
+ 
     }
     
 }

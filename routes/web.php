@@ -12,13 +12,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', 'HomeController@index')->name('welcome');
 
 // Test Messgae
 Route::pattern('id', '[0-9]+');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+
 
 Route::group(['prefix' => 'filemanager', 'middleware'=>'authadmin:filemanager_show'], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
@@ -140,6 +141,12 @@ Route::get('/admin/edit/evidence/{id}', 'EvidenceController@edit');
 Route::post('/admin/edit/evidence/{id}', 'EvidenceController@update');
 Route::post('/admin/destroy/evidence', 'EvidenceController@destroy');
 
+//Admin ADDLD
+Route::get('/admin/AddLD/json', 'AddLDController@json');
+Route::get('/admin/AddLD', 'AddLDController@index');
+Route::get('/admin/create/AddLD', 'AddLDController@create');
+Route::post('/admin/create/AddLD', 'AddLDController@store');
+
 //Admin governor
 Route::get('/admin/governors/json', 'GovernorController@json');
 Route::get('/admin/governors', 'GovernorController@index');
@@ -158,6 +165,7 @@ Route::get('/admin/edit/user/{id}', 'UserController@edit');
 Route::post('/admin/edit/user/{id}', 'UserController@update');
 Route::post('/admin/destroy/user', 'UserController@destroy');
 Route::get('/admin/show/user/{id}', 'UserController@show');
+Route::get('/admin/prindpdf/user/{id}', 'UserController@prindpdf');
 Route::get('/admin/approve/user/{id}', 'UserController@approve');
 Route::get('/admin/user/reg/{id}', 'UserController@ArbitrationForm');
 

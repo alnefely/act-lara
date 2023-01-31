@@ -13,14 +13,15 @@
 
 @section('content')
     
-    <h4  class="mb-4 text-danger text-center"><i class="fas fa-minus-circle"></i> <a class="mb-4 text-dark text-center"> عند اضافة الدرجة لا يمكن التعديل عليها، الدرجة للشاهد من 1 - 10</a></h4>
+    <h4  class="mb-4 text-danger text-center"><i class="fas fa-minus-circle"></i> <a class="mb-4 text-dark text-center"> عند اضافة الدرجة لا يمكن التعديل عليها</a></h4>
 
 
     <div style="overflow: auto">
-        <table class="table table-striped">
+        <table class="table table-warning">
             <thead class="thead-dark">
                 <tr>
-                    <th style="font-size: 15px">#</th>
+                    <th style="font-size: 15px">ID</th>
+                    <th style="font-size: 15px">الفريق</th>
                     <th style="font-size: 15px">الفئة</th>
                     <th style="font-size: 15px">المعيار</th>
                     <th style="font-size: 15px">الرابط</th>
@@ -33,7 +34,8 @@
 
                 @foreach ($UserRegs as $key => $item)
                     <tr>
-                        <td>{{ $key+1 }}</td>
+                        <td>{{ $item->user->id  }}</td>
+                        <td>{{ $item->user->school_name }}</td>
                         <td>{{ $item->category->name }}</td>
                         <td>{{ $item->standard->name }}</td>
                         <td>
@@ -46,7 +48,7 @@
                             {{ number_format($degree) }}
                         </td>
                         <td>
-                            <button data-standard_id="{{ $item->standard_id }}" data-reg_id="{{ $item->id }}" data-name="{{ $item->standard->name }}" class="btn btn-primary btn-show btn-sm" data-toggle="modal" data-target="#Form">
+                            <button data-standard_id="{{ $item->standard_id }}" data-reg_id="{{ $item->id }}" data-name="{{ $item->standard->name }}" class="btn btn-success btn-show btn-sm" data-toggle="modal" data-target="#Form">
                                 عرض
                             </button>
                         </td>
@@ -67,13 +69,13 @@
             </button>
         </div>
         <div class="modal-body">
-            <table class="table table-striped">
+            <table class="table table-warning">
                 <thead class="thead-dark">
                     <tr>
                         <th style="font-size: 15px">#</th>
-                        <th style="font-size: 15px">المؤشر</th>
-                        <th style="font-size: 15px">الشاهد</th>
-                        <th style="font-size: 15px">الدرجة</th>
+                        <th style="font-size: 15px">Points</th>
+                        <th style="font-size: 15px">SubPoints</th>
+                        <th style="font-size: 15px">degree</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -162,12 +164,12 @@
         var evidence = $(this).data('evidence');
         var reg_id = $(this).data('reg_id');
 
-        if( degree == '' || degree <= 0 ){
-            return alert('يجب ان تكون الدرجة اكبر من او تساوي 1');
+        if( degree == '' || degree < 0 || degree > 47 ){
+            return alert('يجب ان تكون الدرجة من 0 الى 47 ');
         }
 
 
-        if( confirm('هل أنت متاكد حفظ الدرجة؟') ){
+        if( confirm('هل أنت متاكد من حفظ الدرجة؟') ){
             $.ajax({
                 url: "{{ url('governor/store/degree') }}",
                 type: "POST",

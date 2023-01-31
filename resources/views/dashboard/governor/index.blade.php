@@ -7,7 +7,8 @@
 @endsection
 
 @section('style')
-    <link rel="stylesheet" href="{{ url('/dashboard/dataTables/dataTables.bootstrap4.min.css') }}" />
+<link rel="stylesheet" href="{{ url('/dashboard/datatable/dataTables.bootstrap4.min.css') }}" />
+<link rel="stylesheet" href="{{ url('/dashboard/datatable/buttons.dataTables.min.css') }}" />
 @endsection
 
 
@@ -16,7 +17,7 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>الاسم</th>
+                <th>اسم المحكم</th>
                 <th>اسم المستخدم</th>
                 <th>الجوال</th>
                 <th> الادارة</th>
@@ -30,16 +31,28 @@
 @endsection
 
 @section('script')
-    <script src="{{ url('/dashboard/dataTables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ url('/dashboard/dataTables/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ url('/dashboard/datatable/jquery.dataTables.min.js') }}"></script>
+<script src="{{ url('/dashboard/datatable/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ url('/dashboard/datatable/dataTables.buttons.min.js') }}"></script>
+<script src="{{ url('/dashboard/datatable/jszip.min.js') }}"></script>
+<script src="{{ url('/dashboard/datatable/buttons.html5.min.js') }}"></script>
+<script src="{{ url('/dashboard/datatable/buttons.print.min.js') }}"></script>
 
-    <script type="text/javascript">
-        $(document).ready(function(){
+<script type="text/javascript">
+    $(document).ready(function(){
 
-            var table = $('.data-table').DataTable({
-                processing: true,
-                serverSide: true,
-                order: [[ 1, 'desc' ]],
+        var table = $('.data-table').DataTable({
+            processing: true,
+            serverSide: true,
+            order: [[ 1, 'desc' ]],
+            dom: 'lBfrtip',
+            buttons: {
+                buttons: [
+                    { extend: 'copyHtml5', text: 'نسخ', className: 'btn btn-sm'},
+                    { extend: 'excelHtml5', text: 'تصدير', className: 'btn btn-sm'},
+                    { extend: 'print', text: 'طباعة', className: 'btn btn-sm'}
+                ]
+            },
                 @if( getLang() == 'ar' )
                     language: {
                         "url": "{{ url('/dashboard/dataTables/Arabic.json') }}"

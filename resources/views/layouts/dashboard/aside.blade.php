@@ -28,6 +28,9 @@
                 </div>
             </div>
         </div>
+        @php  $admin = auth('AuthAdmin')->user();  @endphp
+
+        @if ($admin->main == 'main' || $admin->main == 'male' || $admin->main == 'female')
 
         <ul class="side-menu " style="font-family: 'Cairo'; ">
             <li class="slide">
@@ -45,7 +48,8 @@
                 </a>
             </li>
             <hr />
-            
+            @endif
+            @if ($admin->main == 'main' )
             <li class="slide">
                 <a class="side-menu__item" data-toggle="slide" href="#">
                     <i class="fas fa-gavel side-menu__icon"></i>
@@ -69,10 +73,20 @@
                     <li><a class="slide-item" href="{{ url('/admin/standards') }}">المعايير</a></li>
                     <li><a class="slide-item" href="{{ url('/admin/indicators') }}">المؤشرات</a></li>
                     <li><a class="slide-item" href="{{ url('/admin/evidences') }}">الشواهد</a></li>
+                    <li><a class="slide-item" href="{{ url('/admin/AddLD') }}">تاريخ التحكيم والرابط</a></li>
+
                 </ul>
             </li>
             <hr />
-            
+            @endif
+
+            <hr />
+            <li class="slide">
+                <a class="side-menu__item" href="{{ url('/admin/logout') }}">
+                    <i class="bx bx-log-out side-menu__icon"></i>
+                    <span class="side-menu__label">تسجيل خروج</span>
+                </a>
+            </li>
 
             {{-- <li class="slide">
                 <a class="side-menu__item" href="{{ url('/admin/settings') }}">
@@ -81,13 +95,13 @@
                 </a>
             </li> --}}
 
-            {{-- <li class="slide">
+           {{-- <li class="slide">
                 <a class="side-menu__item" href="{{ route('contact.index') }}">
                     <i class="fa fa-quote-right side-menu__icon"></i>
                     <span class="side-menu__label">الرسائل</span>
                 </a>
-            </li>
-            <li class="slide">
+            </li> --}}
+            {{-- <li class="slide">
                 <a class="side-menu__item" href="{{ url('/admin/profile') }}">
                     <i class="fa fa-user side-menu__icon"></i>
                     <span class="side-menu__label">الملف التعريفي</span>
@@ -105,14 +119,6 @@
                     <li><a class="slide-item" href="{{ url('/admin/create/group') }}">إنشاء مجموعة جديدة</a></li> 
                </ul>
             </li> --}}
-            <hr />
-            <li class="slide">
-                <a class="side-menu__item" href="{{ url('/admin/logout') }}">
-                    <i class="bx bx-log-out side-menu__icon"></i>
-                    <span class="side-menu__label">تسجيل خروج</span>
-                </a>
-            </li>
-
         </ul>
     </div>
 </aside>

@@ -118,6 +118,7 @@
         <!-- Footer opened -->
         <div class="main-footer ht-40">
             <div class="container-fluid pd-t-0-f ht-100p">
+          <span> {{ date('Y') }}© برمجة وتصميم <span class="fa fa-phone mx-1 text-success"> </span> <a target="_blank" href="https://wa.me/966540810007">أحمد الزهراني</a></span>
             </div>
         </div>
         <!-- Footer closed -->

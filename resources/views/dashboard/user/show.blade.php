@@ -14,29 +14,34 @@
         <thead class="thead-dark">
             <tr>
                 <td style="font-size: 13px;"><a style="background-color: rgb(243, 238, 228)" >الفئة </a> {{ $user->category->name }} - {{$user->gender}}  </td>
-                <td style="font-size: 13px"><a style="background-color: rgb(243, 238, 228)"> اسم مدير الفريق</a> {{$user->name}}  </td>
-                <td style="font-size: 13px"><a style="background-color: rgb(243, 238, 228)"> رقم مدير الفريق</a> {{ $user->owner_phone }}  </td>
+                <td style="font-size: 13px"><a style="background-color: rgb(243, 238, 228)"> اسم مدرب الفريق</a> {{$user->name}} || {{ $user->owner_phone }} </td>
                 <td style="font-size: 13px"><a style="background-color: rgb(243, 238, 228)"> اسم الفريق</a> {{ $user->school_name }}</td>
-            </tr>
-                <td style="font-size: 13px"><a style="background-color: rgb(243, 238, 228)"> أعضاء الفريق</a> {{ $user->captin_name }}  </td>
-            </tr>
+                <td style="font-size: 13px"><a style="background-color: rgb(243, 238, 228)"> اسم المدرسة</a>  {{ $user->school_real }} || {{ $user->education->name }} </td>
+            </tr>      
+            <tr>
+                <td style="font-size: 13px"><a style="background-color: rgb(243, 238, 228)"> أعضاء الفريق </a> 1- {{ $user->member1 }} | {{ date('Y', strtotime($user->member1_date))}}</td>
+                <td style="font-size: 13px"> 2- {{ $user->member2 }} | {{ date('Y', strtotime($user->member2_date))}}</td>
+                <td style="font-size: 13px"> 3- {{ $user->member3 }} | {{ date('Y', strtotime($user->member3_date))}}</td>
+                <td style="font-size: 13px"> 4- {{ $user->member4 }} | @if($user->member4_date != NULL)  {{ date('Y', strtotime($user->member4_date))}} @else -- @endif</td>
+                <td style="font-size: 13px"> 5- {{ $user->member5 }} | @if($user->member5_date != NULL)  {{ date('Y', strtotime($user->member5_date))}} @else -- @endif</td>
+                </tr>
         </thead>
     </table>
 <br>
 
 
     <div style="overflow: auto">
-        <table class="table table-striped">
+        <table class="table table-warning">
             <thead class="thead-dark">
                 <tr>
                     <th style="font-size: 15px">#</th>
                     <th style="font-size: 15px">المعيار</th>
-                    <th style="font-size: 15px">المحكم 1</th>
-                    <th style="font-size: 15px">درجات م 1</th>
-                    <th style="font-size: 15px">المحكم 2</th>
-                    <th style="font-size: 15px">درجات م 2</th>
-                    <th style="font-size: 15px">المحكم 3</th>
-                    <th style="font-size: 15px">درجات م 3</th>
+                    <th style="font-size: 15px">المحكم"1"</th>
+                    <th style="font-size: 15px">الدرجة</th>
+                    <th style="font-size: 15px">المحكم"2"</th>
+                    <th style="font-size: 15px">الدرجة</th>
+                    <th style="font-size: 15px">المحكم"3"</th>
+                    <th style="font-size: 15px">الدرجة</th>
                     <th style="font-size: 15px">المتوسط</th>
                     <th style="font-size: 15px">الرابط</th>
                     <th style="font-size: 15px">نموذج التحكيم</th>
@@ -45,7 +50,9 @@
 
             <tbody>
 
-                
+                @php
+                    $TotalAV = 0;
+                @endphp
                 @foreach ($evidences as $key => $item)
                     <tr>
                         <td>{{ $key+1 }}</td>
@@ -98,9 +105,10 @@
                         </td>
                         <td>
                             @php
-                                $average = ($deg1+$deg2+$deg3)/3
+                                $average = ($deg1+$deg2+$deg3)/3;
+                                $TotalAV +=  ceil($average);
                             @endphp
-                            {{ number_format($average) }}
+                            {{ ceil($average) }}
                         </td>
                         <td>
                             <strong><a target="_blank" href="{{ $item->url }}">الرابط</a></strong>
@@ -108,13 +116,37 @@
                         <td>
                             <strong><a target="_blank" href="/admin/user/reg/{{ $item->id }}">نموذج التحكيم</a></strong>
                         </td>
+
                     </tr>
+                    
                 @endforeach
+
+                <tr>
+                    <th style="font-size: 15px"></th>
+                    <th style="font-size: 15px"></th>
+                    <th style="font-size: 15px"></th>
+                    <th style="font-size: 15px"></th>
+                    <th style="font-size: 15px"></th>
+                    <th style="font-size: 15px"></th>
+                    <th style="font-size: 15px"></th>
+                    <th style="font-size: 15px"></th>
+
+                    <th style="font-size: 15px">{{ ceil($TotalAV) }}</th>
+                    @php 
+                    if ($user->type == 'كبار')
+                    $perc = ( ($TotalAV + 100) / 1340) * 100;
+                    else
+                    $perc = ($TotalAV / 375) * 100;
+                    @endphp
+                    <th style="font-size: 15px">{{$perc}} %</th>
+                    {{-- <th style="font-size: 15px"></th> --}}
+
+                    <th style="font-size: 15px"><strong><a style="background-color: rgb(204, 5, 5); color:#fff"
+                        href="{{ url('/admin/prindpdf/user',$user->id)}}" target="_blank"><i class="fa fa-print"> PDF</i></a></strong></th>
+                </tr>
+
             </tbody>
         </table>
     </div>
-
-    {{-- <li class="list-group-item text-center" style="font-size: 15px; background-color:rgb(36, 43, 68); color:white">مجموع الدرجات: <strong>{{ $TotalScores }}</strong></li> --}}
-
 
 @endsection

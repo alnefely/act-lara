@@ -87,7 +87,7 @@ class AuthGovernorController extends Controller
         if ( auth('governor')->check() ) :
             $governor = auth('governor')->user();
             
-            $UserRegs = UserReg::with('standard:id,name','category:id,name')
+            $UserRegs = UserReg::with('standard:id,name','category:id,name','user:id,school_name')
             ->where('governor_id1', $governor->id)
             ->orWhere('governor_id2', $governor->id)
             ->orWhere('governor_id3', $governor->id)
